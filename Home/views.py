@@ -3,12 +3,17 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login,logout
 from .forms import UserAddForm
 from django.contrib.auth.models import User
+from products.models import Product
 
 
 # Create your views here.
 
 def Index(request):
-    return render(request,"index.html")
+    products = Product.objects.all()
+    context = {
+        "product":products
+    }
+    return render(request,"index.html",context)
 
 
 def SignIn(request):

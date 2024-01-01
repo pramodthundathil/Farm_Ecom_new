@@ -21,3 +21,42 @@ class Product(models.Model):
     date = models.DateField(auto_now_add=True)
     status = models.BooleanField(default=False)
     
+    def __str__(self):
+        return self.Product_Name 
+    
+
+class Blog(models.Model):
+    options = (
+    ("Fruits","Fruits"),
+    ("Vegetable","Vegetable"),
+    ("fertilizers","fertilizers"),
+    ("other","other")
+    )
+    
+    Blog_name = models.CharField(max_length = 255)
+    Blog_category = models.CharField(max_length = 255,choices = options)
+    Blog_Discription = models.CharField(max_length = 1000)
+    Disease = models.CharField(max_length = 255)
+    Disease_Discription = models.CharField(max_length = 1000)
+    Symptoms = models.CharField(max_length = 255)
+    Symptoms_Discription = models.CharField(max_length = 1000)
+    Remedy = models.CharField(max_length = 1000)
+    Other = models.CharField(max_length = 1000)
+    Blog_image = models.FileField(upload_to="blogs")
+    
+class Cart(models.Model):
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    product = models.ForeignKey(Product,on_delete = models.CASCADE)
+    Quantity = models.FloatField()
+    TotalPrice = models.FloatField()
+    
+class Purchase(models.Model):
+    user = models.ForeignKey(User,on_delete = models.CASCADE)
+    product = models.ForeignKey(Product,on_delete = models.CASCADE)
+    Quantity = models.FloatField()
+    TotalPrice = models.FloatField()
+    date = models.DateField(auto_now_add = True)
+    status = models.CharField(max_length=255)
+    
+    
+    
