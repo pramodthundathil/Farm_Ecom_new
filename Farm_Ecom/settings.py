@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-a!9^63eicuet2=1j4s_+!=^kx9_dzl52^#qzqj3i_jf54k_nr2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -138,3 +138,9 @@ RAZOR_KEY_SECRET = "IfMivqkfXWvuJi2IR10W4bzN"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'ecartshoppingtest@gmail.com'
+EMAIL_HOST_PASSWORD = 'annsizhjwccpztrj'
