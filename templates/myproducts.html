@@ -1,0 +1,86 @@
+{% extends "index.html" %}
+{% block content %}
+
+<style>
+  
+    .content input, select{
+        width: 100%;
+        padding: 10px;
+        border: .5px solid rgb(204, 201, 201);
+        border-radius: 5px;
+
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="modelswich text-center">
+
+        <button class="btn btn-outline-primary btn-lg " data-bs-toggle="modal" data-bs-target="#exampleModal" >Add New Product</button>
+        <br><br>
+        <h2>My Product List</h2>
+
+    </div>
+
+    <div class="content mt-5">
+        <table class="table table-stripped">
+            <tr>
+                <th>Product name</th>
+                <th>Product Price</th>
+                <th>Product Category</th>
+                <th>Product Location</th>
+                <th>Image</th>
+                <th>Stock</th>
+                <th></th>
+            </tr>
+            {% for i in products %}
+            <tr>
+                <td>{{i.Product_Name}}</td>
+                <td>{{i.Product_price}}</td>
+                <td>{{i.Product_Category}}</td>
+                <td>{{i.Product_Location}}</td>
+                <td><img src="{{i.Product_Image.url}}" width="auto" height="100px" alt=""></td>
+                <td>{{i.Product_Stock}}</td>
+                <td>
+                    <!-- <a href="" class="btn btn-outline-warning btn-sm">Upadte</a> -->
+                    <a href="" class="btn btn-outline-dark">View</a>
+                </td>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+<!-- model for product add  -->
+
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLabel">Add New Product</h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body content">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {% for fields in form %}
+                        {{fields.label}}: <br>
+                        {{fields}} <br><br>
+                {% endfor %}
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add Now</button>
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="foot mt-5">
+
+</div>
+  
+{% endblock %}
