@@ -1,0 +1,27 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="container mt-5">
+<table class="table table-striped">
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th>Purchase Date</th>
+        <th>Status</th>
+    </tr>
+    {% for i in purchase %}
+    <tr>
+        <td>{{i.product}}</td>
+        <td>{{i.product.Product_price}}</td>
+        <td>{{i.TotalPrice}}</td>
+        <td>{{i.date}}</td>
+        <td>{{i.status}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+<br><br><br><br>
+
+  
+{% endblock %} 
