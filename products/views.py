@@ -31,8 +31,16 @@ def MyProducts(request):
 
 def Blogs(request):
     blogs =  Blog.objects.all()
+    blog1 = Blog.objects.filter(Blog_category = "Fruits")
+    blog2 = Blog.objects.filter(Blog_category = "Vegetable")
+    blog3 = Blog.objects.filter(Blog_category = "fertilizers")
+    
+
     context = {
-        "blogs":blogs
+        "blogs":blogs,
+        "blog1":blog3,
+        "blog2":blog2,
+        "blog3":blog3
     }
     return render(request,'blog.html',context)
 
