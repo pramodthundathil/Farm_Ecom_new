@@ -1,0 +1,63 @@
+{% extends "index.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    .profile{
+        width:60%;
+        border: 1px solid gray;
+        border-radius: 10px;
+        margin: auto;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        padding: 30PX;
+    }
+</style>
+
+<div class="profile">
+<h3 class="text-center">USER PROFILE</h3>
+
+<table class="table table-stripped">
+ 
+    <tr>
+        <th>Name:</th>
+        <td><input type="text" class="form-control border-0" value="{{user.user.first_name}}" readonly ></td>
+    </tr>
+    <tr>
+        <th>Email:</th>
+        <td><input type="text" value="{{user.user.email}}" class="form-control border-0" readonly ></td>
+    </tr>
+    <tr>
+        <th>Phone Number:</th>
+        <td><input type="text" value="{{user.phone}}" name="phone" class="form-control border-0" readonly></td>
+
+        
+    </tr>
+    <tr>
+        <th>House:</th>
+        <td><input type="text" value="{{user.house}}" name="house" class="form-control border-0" readonly></td>
+
+      
+    </tr>
+    <tr>
+        <th>Place And District:</th>
+        <td><input type="text" name="city" value="{{user.city}}" class="form-control border-0"  readonly></td>
+        
+    </tr>
+    <tr>
+        <th>State:</th>
+        <td><input type="text" name="state" value="{{user.state}}" class="form-control border-0" readonly ></td>
+
+       
+    </tr>
+    
+
+
+    
+
+</table>
+
+</div>
+
+
+{% endblock %}

@@ -20,6 +20,8 @@ class Product(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True,blank=True)
     date = models.DateField(auto_now_add=True)
     status = models.BooleanField(default=False)
+    review = models.IntegerField(null=True, blank=True)
+    noofReviews = models.IntegerField(null=True, blank=True)
     
     def __str__(self):
         return self.Product_Name 
@@ -57,6 +59,13 @@ class Purchase(models.Model):
     TotalPrice = models.FloatField()
     date = models.DateField(auto_now_add = True)
     status = models.CharField(max_length=255)
+
+class Reviews(models.Model):
+    product = models.ForeignKey(Product,on_delete = models.CASCADE)
+    reviewer = models.ForeignKey(User, on_delete=models.CASCADE)
+    review = models.CharField(max_length=1000)
+    rating = models.IntegerField(null=True, blank=True)
+    date = models.DateField(auto_now_add=True,null=True,blank=True)
     
     
     

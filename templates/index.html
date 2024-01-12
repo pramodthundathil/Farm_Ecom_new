@@ -36,6 +36,17 @@
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style>
+        .navbar{
+            background-color: rgb(20, 64, 20) !important;
+        }
+        .nav-link{
+            color:white !important;
+        }
+        .nav-link:hover{
+            background-color: green !important;
+        }
+    </style>
 
 </head>
 
@@ -51,10 +62,10 @@
                     </div>
                     <div class="our-link">
                         <ul>
-                    {% if request.user.is_authenticated %}
+                            {% if request.user.is_authenticated %}
 
-                            <li><a href="#"><i class="fa fa-user s_color"></i>
-<span>{{request.user.first_name}}</span>
+                            <li><a href="{%url 'Userprofile' %}"><i class="fa fa-user s_color"></i>
+                            <span>{{request.user.first_name}}</span>
                             
                             </a></li>
                             {% endif %}
@@ -127,8 +138,8 @@
     <!-- Start Main Top -->
     <header class="main-header">
         <!-- Start Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light navbar-default bootsnav">
-            <div class="container">
+        <nav class="navbar navbar-expand-lg text-light navbar-light navbar-default bootsnav">
+            <div class="container-fluid">
                 <!-- Start Header Navigation -->
                 <div class="navbar-header">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu"
@@ -136,7 +147,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
                     <a class="navbar-brand" href="{%url 'Index' %}"><img src="{%static 'images/logo.png' %}"
-                            class="logo" width="150px" alt=""></a>
+                            class="logo" width="200px" alt=""></a>
                 </div>
                 <!-- End Header Navigation -->
 
@@ -146,8 +157,8 @@
                         <li class="nav-item active"><a class="nav-link" href="{%url 'Index' %}">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="{%url 'About' %}">About Us</a></li>
                         <li class="nav-item"><a class="nav-link" href="{%url 'Blogs' %}">Blog</a></li>
-                        <!-- <li class="nav-item"><a class="nav-link" href="contact-us.html">Contact Us</a></li> -->
                     {% if request.user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="{%url 'OrderStatus' %}">Customer Orders</a></li>
                         
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">SHOP <i class="bi bi-chevron-double-down" style="font-size: large;"></i></a>
@@ -179,7 +190,7 @@
                             <a href="{%url 'CartPage' %}">
                                 {% comment %} <i class="fa fa-shopping-bag"></i> {% endcomment %}
                                 <span class="badge"></span>
-                                <p>My Cart</p>
+                                <p class="text-light">My Cart</p>
                             </a>
                         </li>
                     </ul>
@@ -234,7 +245,7 @@
                 <form action="{%url 'Search' %}" method="post">
                     {% csrf_token %}
                 <!-- <span class="input-group-addon"></span> -->
-                <input type="text" name="search" style="background-color: white; width:400px" required class="form-control" placeholder="Search">
+                <input type="text" name="search" style="background-color: white;color:black;width:400px" required class="form-control" placeholder="Search">
                 <br>
                 <button type="submit" class="btn btn-outline-light btn-sm">Search <i class="fa fa-search"></i></button>
             </form>
@@ -386,6 +397,8 @@
                         <div class="why-text">
                             <h4>{{item.Product_Name}}</h4>
                             <h5> ₹{{item.Product_price}}</h5>
+                            <a class="btn btn-info btn-sm"  href="{%url 'ViewProduct' item.id %}">View Product</a>
+
                         </div>
                     </div>
                 </div>

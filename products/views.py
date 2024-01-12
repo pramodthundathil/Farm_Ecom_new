@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import Productaddform
-from  .models import Product, Blog, Cart, Purchase
+from  .models import Product, Blog, Cart, Purchase, Reviews
 from django.contrib import messages
 import razorpay
 from django.conf import settings
@@ -185,3 +185,64 @@ def Search(request):
             "name": Product.objects.filter(Product_Name__contains = ser) 
         }
         return render(request, "searchres.html",context)
+
+def OrderStatus(request):
+    purchase = Purchase.objects.filter(product__user = request.user)
+    context = {
+        "purchase":purchase
+    }
+    return render(request,"customerorders.html",context)
+
+def OrderstatusChange(request,pk,str):
+
+    if str == "accept":
+        purchase = Purchase.objects.get(id = pk)
+        purchase.status = "Order Accepted"
+        purchase.save()
+        messages.info(request,"Order status Changed")
+        return redirect("OrderStatus")
+
+    elif str == "despatch":
+        purchase = Purchase.objects.get(id = pk)
+        purchase.status = "Order despatched"
+        purchase.save()
+        messages.info(request,"Order status Changed")
+        return redirect("OrderStatus")
+    elif str == "delivered":
+        purchase = Purchase.objects.get(id = pk)
+        purchase.status = "Order delivered"
+        purchase.save()
+        messages.info(request,"Order status Changed")
+        return redirect("OrderStatus")
+    elif str == "cancel":
+        purchase = Purchase.objects.get(id = pk)
+        purchase.status = "Order Cancelled"
+        purchase.save()
+        messages.info(request,"Order status Changed")
+        return redirect("OrderStatus")
+    elif str == "delete":
+        purchase = Purchase.objects.get(id = pk).delete()
+        messages.info(request,"Item Deleted")
+        return redirect("OrderStatus")
+
+    return redirect("OrderStatus")
+
+def ViewProduct(request,pk):
+    product = Product.objects.get(id = pk)
+    reviews = Reviews.objects.filter(product = product)
+    context = {
+        "product":product,
+        "reviews":reviews
+    }
+    return render(request,"productsigngleview.html",context)
+
+
+def ReviewAdd(request,pk):
+    if request.method == "POST":
+        product = Product.objects.get(id = pk)
+        review = request.POST["review"]
+        re = Reviews.objects.create(product = product, reviewer = request.user,review = review)
+        re.save()
+        messages.info(request,"Review Added..")
+
+    return redirect("ViewProduct", pk =pk)

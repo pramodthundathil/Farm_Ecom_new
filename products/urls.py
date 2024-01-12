@@ -17,6 +17,10 @@ urlpatterns = [
     path("BlogSingle/<int:pk>",views.BlogSingle,name="BlogSingle"),
     path("DeleteProduct/<int:pk>",views.DeleteProduct,name="DeleteProduct"),
     path("Search",views.Search,name="Search"),
+    path("OrderStatus",views.OrderStatus,name="OrderStatus"),
+    path("OrderstatusChange/<int:pk>/<str:str>",views.OrderstatusChange,name="OrderstatusChange"),
+    path("ViewProduct/<int:pk>",views.ViewProduct,name="ViewProduct"),
+    path("ReviewAdd/<int:pk>",views.ReviewAdd,name="ReviewAdd"),
 
 
     

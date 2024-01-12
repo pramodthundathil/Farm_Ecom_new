@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <h3 class="text-center display-5">Customer Orders</h3>
+    {% for message in messages  %}
+            <h6 style="color:red" class="text-center">{{message}}</h6> 
+            {% endfor %}
+<table class="table table-striped">
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Total</th>
+        <th>Purchase Date</th>
+        <th>Ordered By</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    {% for i in purchase %}
+    <tr>
+        <td>{{i.product}}</td>
+        <td>{{i.product.Product_price}}</td>
+        <td>{{i.TotalPrice}}</td>
+        <td>{{i.date}}</td>
+        <th>{{i.user.first_name}} <a href="{%url 'OrderUserprofile' i.user.id %}" class="btn btn-sm btn-outline-dark">View</a></th>
+        <td>{{i.status}}</td>
+        <td>
+        <a href="{%url 'OrderstatusChange' i.id 'accept'%}" class="btn btn-sm btn-outline-success">Order Accepted</a>
+        <a href="{%url 'OrderstatusChange' i.id 'despatch'%}" class="btn btn-sm btn-outline-info">Despach item</a>
+        <a href="{%url 'OrderstatusChange' i.id 'delivered'%}" class="btn btn-sm btn-outline-success">Item Delivered</a>
+        <a href="{%url 'OrderstatusChange' i.id 'cancel'%}" class="btn btn-sm btn-outline-warning">Cancel Order</a>
+        <a href="{%url 'OrderstatusChange' i.id 'delete'%}" class="btn btn-sm btn-outline-danger">Delete Order</a>
+
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+<br><br><br><br>
+
+  
+{% endblock %} 

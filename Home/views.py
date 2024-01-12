@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login,logout
 from .forms import UserAddForm
 from django.contrib.auth.models import User
 from products.models import Product
+from .models import UserData
 
 
 # Create your views here.
@@ -64,3 +65,39 @@ def SignUp(request):
 def SignOut(request):
     logout(request)
     return redirect('Index')
+
+
+def Userprofile(request):
+    if UserData.objects.filter(user = request.user).exists():
+        user = UserData.objects.get(user = request.user)
+    else:
+        user = UserData.objects.create(
+            name = "Nil",
+            house = "Nil",
+            phone = "nil",
+            city = "nil",
+            state = "nil",
+            user = request.user
+        )
+        user.save()
+        return redirect("Userprofile")
+
+    if request.method == "POST":
+        user.phone = request.POST["phone"]
+        user.house = request.POST["house"]
+        user.city = request.POST["city"]
+        user.state = request.POST["state"]
+        user.save()
+
+    context = {
+        "user":user
+    }
+    return render(request,"userprofile.html",context)
+
+def OrderUserprofile(request,pk):
+    userid = User.objects.get(id = pk)
+    user = UserData.objects.get(user = userid)
+
+    context = {'user':user}
+
+    return render(request,"orderprofile.html",context)
